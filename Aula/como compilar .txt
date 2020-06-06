@@ -1,0 +1,9 @@
+white@white-Aspire-E5-571:~/MeusProjetos/GitHub/Estrutura_de_Dados$ cd /home/white/MeusProjetos/GitHub/Estrutura_de_Dados/Aula/Aula01/
+
+white@white-Aspire-E5-571:~/MeusProjetos/GitHub/Estrutura_de_Dados/Aula/Aula01$ gcc texte.c -o texte
+
+white@white-Aspire-E5-571:~/MeusProjetos/GitHub/Estrutura_de_Dados/Aula/Aula01$ ./texte
+
+Ola Mundo!!!
+Ola pessoal!!!
+Este é um blog sobre Linguagem C!!!
