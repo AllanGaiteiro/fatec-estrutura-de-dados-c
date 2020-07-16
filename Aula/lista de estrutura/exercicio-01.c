@@ -18,44 +18,91 @@ Crie uma estrutura para disciplinas que o aluno frequenta (nome da disciplina, d
 */
 struct tp_diciplina
 {
-    char nome;
-    char diaSeman;
+    char nome[40];
+    char diaSeman[10];
     int inicio;
     int termino;
 } diciplina[7];
 
 struct tp_cad_alunos
 {
-    char nome;
-    char ra;
-    char curso;
-    struct tp_diciplina diciplina[];
-} cad_aluno[2];
+    char nome[40];
+    char ra[12];
+    char curso[40];
+    struct tp_diciplina diciplina[7];
+};
 
-int main()
+void cad(struct tp_cad_alunos *cad_aluno, int nAlunos)
 {
-    for (int i = 0; i < 2; i++)
+	
+    int i, j;
+    printf("********Registro de Alunos************");
+    for (i = 0; i < nAlunos; i++)
     {
+
+        printf("********Registro de Alunos[%d]************");
         printf("Nome.........: ");
-        scanf("%s", &cad_aluno[i].nome);
+        fflush(stdin);
+        fgets(cad_aluno[i].nome, 40, stdin);
         printf("RA.........: ");
-        scanf("%s", &cad_aluno[i].ra);
+        fflush(stdin);
+        fgets(cad_aluno[i].ra, 12, stdin);
         printf("curso.........: ");
-        scanf("%s", &cad_aluno[i].curso);
+        fflush(stdin);
+        fgets(cad_aluno[i].curso, 40, stdin);
         printf("diciplinas frequentadas******\n");
-        for (int j = 0; j < 7; j++)
+        for (j = 0; j < 3; j++)
         {
             printf("\nnome.........: ");
-            scanf("%s",&cad_aluno[i].diciplina[j].nome);
+            fflush(stdin);
+            fgets(cad_aluno[i].diciplina[j].nome, 40, stdin);
             printf("\nDia.........: ");
-            scanf("%s",&cad_aluno[i].diciplina[j].diaSeman);
+            fflush(stdin);
+            fgets(cad_aluno[i].diciplina[j].diaSeman, 10, stdin);
             printf("\nInicia.........: ");
-            scanf("%d",&cad_aluno[i].diciplina[j].inicio);
+            fflush(stdin);
+            scanf("%d", &cad_aluno[i].diciplina[j].inicio);
             printf("\nnTermina.........: ");
-            scanf("%d",&cad_aluno[i].diciplina[j].termino);
+            scanf("%d", &cad_aluno[i].diciplina[i].termino);
         }
-        
     }
+
+    ////// texte
+}
+void regist(struct tp_cad_alunos *cad_aluno, int nAlunos)
+{
+    int i, j;
+
+    printf("************Alunos Cadastrados******************");
+    for (i = 0; i < nAlunos; i++)
+    {
+        int n = i + 1;
+        printf("******************aluno[%d]***************", i);
+        printf("Nome.........: %s", cad_aluno[i].nome);
+        printf("RA.........: %s", cad_aluno[i].ra);
+        printf("curso.........: %s", cad_aluno[i].curso);
+        printf("diciplinas frequentadas******\n");
+        for (j = 0; j < 3; j++)
+        {
+            printf("\nnome.........: %s", cad_aluno[i].diciplina[j].nome);
+            printf("\nDia.........: %s", cad_aluno[i].diciplina[j].diaSeman);
+            printf("\nInicia.........: %d", cad_aluno[i].diciplina[j].inicio);
+            printf("\nnTermina.........: %d", cad_aluno[i].diciplina[j].termino);
+        }
+    }
+}
+
+int main(void)
+{
+    int nAlunos;
+
+    printf("quantidade de Aluno");
+    scanf("%d", &nAlunos);
+    struct tp_cad_alunos cad_aluno[nAlunos];
+    print("%d", nAlunos);
+	//cad(&cad_aluno, nAlunos);
+    //regist(&cad_aluno,nAlunos);
 
     return 0;
 }
+

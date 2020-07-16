@@ -52,22 +52,22 @@ int main(){
 		
 		printf("\nDigite a Rua......................: ");
 		fflush(stdin);
-		gets(cad_cliente[i].endereco.rua);
+		gets(&cad_cliente[i].endereco.rua);
 		
 		printf("\nDigite o numero..................: ");
 		scanf("%d", &cad_cliente[i].endereco.numero);
 		
 		printf("\nBairo............................: ");
 		fflush(stdin);
-		gets(cad_cliente[i].endereco.bairro);
+		gets(&cad_cliente[i].endereco.bairro);
 		
 		printf("\nCidade............................: ");
 		fflush(stdin);
-		gets(cad_cliente[i].endereco.cidade);
+		gets(&cad_cliente[i].endereco.cidade);
 		
 		printf("\nEstado............................: ");
 		fflush(stdin);
-		gets(cad_cliente[i].endereco.estado);
+		gets(&cad_cliente[i].endereco.estado);
 		
 		printf("\nDigite o cep............................: ");
 		scanf("%d", &cad_cliente[i].endereco.cep);
