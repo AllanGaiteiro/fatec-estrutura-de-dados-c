@@ -14,7 +14,7 @@ typedef struct
 
 typedef struct
 {
-    REGISTRO A[MAX];
+    REGISTRO A[MAXSLOT];
     int topo;
 } PILHA;
 
@@ -34,7 +34,7 @@ void exibirPilha(PILHA *p)
 ////// Elemento (Push)
 bool inserirElementoPilha(PILHA *p, REGISTRO reg)
 {
-    if (p->topo >= MAX-1) return false;
+    if (p->topo >= MAXSLOT-1) return false;
     {
         p->topo = p->topo+1;
         p->A[p->topo] = reg;
