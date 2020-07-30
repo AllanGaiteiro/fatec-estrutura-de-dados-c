@@ -3,23 +3,33 @@
 
 #define MAXTAM 5
 
-////// nao sei se entendi certo, mas acho que éra pra usar as listas para criar um programa
+struct tp_pessoa
+{
+    char nome[40];
+};
 
-//fiz o programa de um hospital, onde quando as pessoas chegam elas sao ordenadas por ordem de chegada,
-//porem se uma pessoa esta mais doente que as outras ela passa na frente
-//considerando a inclementaçao no inicio como paciente urgente e a no fim como paciente normal
 
+struct tp_aux
+{
+    char nome[40];
+};
 struct tp_lista
 {
     int frente, tras;
-    int pessoa[MAXTAM];
+    struct tp_aux aux[MAXTAM];
+    struct tp_pessoa pessoa[MAXTAM];
 } lista;
 
+void contrutor()
+{
+    lista.frente = 0;
+    lista.tras = 0;
+}
 
 int lista_vazia()
 {
 
-    if (0 == lista.tras)
+    if (lista.frente == lista.tras)
     {
         return 1;
     }
@@ -41,8 +51,14 @@ int lista_cheia()
     }
 }
 
-int push_inicio(int e)
+int lista_tamanho()
 {
+    return lista.tras + 1;
+}
+
+int push_inicio(char *p)
+{
+    
     if (lista_cheia() == 1)
     {
         return printf("\nLista Cheia\n");
@@ -50,29 +66,30 @@ int push_inicio(int e)
     else
     {
         int i;
-        int aux[lista.tras];
         for (i = 0; i < lista.tras; i++)
         {
-            aux[i] = lista.pessoa[i];
+            lista.aux[i].nome[0] = lista.pessoa[i].nome;
         }
-        lista.pessoa[0] = e;
+        lista.pessoa[0].nome = *p;
         lista.tras++;
         for (i = 1; i < lista.tras; i++)
         {
-            lista.pessoa[i] = aux[i - 1];
+            lista.pessoa[i].nome[0] = lista.aux[i - 1].nome;
         }
     }
 }
 
-int push_fim(int e)
+int push_fim(char *p)
 {
+
     if (lista_cheia() == 1)
     {
         return printf("\nLista Cheia\n");
     }
     else
     {
-        lista.pessoa[lista.tras] = e;
+        lista.pessoa[lista.tras].nome[0] = *p;
+        printf("%s",lista.pessoa[lista.tras].nome);
         lista.tras++;
     }
 }
@@ -86,11 +103,10 @@ int pop_inicio()
     else
     {
         int i;
-        int aux[lista.tras];
         for (i = 1; i < lista.tras; i++)
         {
-            aux[i] = lista.pessoa[i];
-            lista.pessoa[i - 1] = aux[i];
+            lista.aux[i].nome[40] = lista.pessoa[i].nome;
+            lista.pessoa[i - 1].nome[40] = lista.aux[i].nome;
         }
         lista.tras--;
     }
@@ -104,7 +120,6 @@ int pop_fim()
     }
     else
     {
-        lista.pessoa[lista.tras] = NULL;
         lista.tras--;
     }
 }
@@ -115,48 +130,24 @@ int print_list()
     int i;
     for (i = 0; i < lista.tras; i++)
     {
-        printf(" - %d", lista.pessoa[i]);
+        printf(" - %s", lista.pessoa[i].nome[0]);
     }
     printf("\n");
 }
 
 void inserir(int ops)
 {
-    int n;
-    printf("digite o numero numero:");
-    fflush(stdin);
-    scanf("%d", &n);
+    char nome[40];
+    printf("digite o nome:");
+    fgets(nome, 40 , stdin );
     getchar();
-    if (ops == 1)
-    {
-        push_inicio(n);
-    }
-    else if (ops == 2)
-    {
-        push_fim(n);
-    }
-    else
-    {
-        printf("\nNumero invalido\n");
-    }
-    ///(ops == 1) ? push_inicio(n) : push_fim(n);
+    
+    (ops == 1) ? push_inicio(&nome) : push_fim(&nome);
     print_list();
 }
 void remover(int ops)
 {
-    if (ops == 1)
-    {
-        pop_inicio();
-    }
-    else if (ops == 2)
-    {
-        pop_fim();
-    }
-    else
-    {
-        printf("\nNumero invalido\n");
-    }
-    //(ops == 1) ? pop_inicio() : pop_fim();
+    (ops == 1) ? pop_inicio() : pop_fim();
     print_list();
 }
 
@@ -172,11 +163,11 @@ int main()
         printf("          [1]Entrada Paciente\n          [2]Saida Paciente\n             [3]Desligar\n");
         printf("..........................................\n\n");
         fflush(stdin);
-        scanf("%d", &menu);// escolhe uma das opçoes
+        scanf("%d", &menu); // escolhe uma das opçoes
         getchar();
         switch (menu)
         {
-        case 1:///// entrada ou pu
+        case 1: ///// entrada ou pu
             printf("Entrada Paciente.....\nStatus:  [1]Urgente [2]Comun\n");
             fflush(stdin);
             scanf("%d", &ops);
@@ -185,7 +176,7 @@ int main()
             break;
 
         case 2:
-            printf("Saida Paciente.....\nStatus:  [1]Faleceu [2]Desistiu");
+            printf("Saida Paciente.....\nStatus:  [1]Urgente [2]Comun");
             fflush(stdin);
             scanf("%d", &ops);
             getchar();
